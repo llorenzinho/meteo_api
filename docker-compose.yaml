@@ -1,0 +1,68 @@
+services:
+  api:
+    build:
+      context: ./app
+      dockerfile: ./app.Dockerfile
+    ports:
+      - 8000:8000
+    develop:
+      watch:
+        - path: ./app/app
+          action: rebuild
+    environment:
+      DB_HOST: "db"
+      DB_PORT: 3306
+      DB_USER: "user"
+      DB_PWD: "password"
+      DB_NAME: "db"
+      DB_DATABASE: "db"
+      LOG_LEVEL: "DEBUG"
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -s http://localhost:8000/healtz" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migrations:
+    container_name: migrations
+    build:
+      context: ./app
+      dockerfile: ./migrations.Dockerfile
+    environment:
+      DB_HOST: "db"
+      DB_PORT: 3306
+      DB_USER: "user"
+      DB_PWD: "password"
+      DB_NAME: "db"
+      DB_DATABASE: "db"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./app/alembic:/app/alembic
+      - ./app/app/db/tables:/app/app/db/tables
+
+  db:
+    image: mysql:9.0.1
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - app-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  app-data:
