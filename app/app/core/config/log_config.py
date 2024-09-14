@@ -11,10 +11,11 @@ class HealthCheckFilter(Filter):
 class LogConfig(BaseSettings):
     """Logging configuration to be set for the server"""
 
-    model_config = SettingsConfigDict(env_prefix='LOG_')
-    logger_name: str = 'radicalbit-ai-monitoring'
+    logger_name: str = 'app'
     log_format: str = '%(levelname)s | %(asctime)s | %(message)s'
-    log_level: str = 'DEBUG'
+    log_level: str = 'INFO'
+
+    model_config = SettingsConfigDict(env_prefix='logger_')
 
     # logger dictConfig
     version: int = 1

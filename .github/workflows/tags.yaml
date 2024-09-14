@@ -1,0 +1,15 @@
+# Here we have released our application
+
+name: Deploy
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "Mocking Deploy to AWS using service containers"
