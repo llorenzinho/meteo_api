@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "3bee"
 # x-release-please-start-version
-version = "0.0.1"
+version = "0.1.0"
 # x-release-please-end
 description = ""
 authors = ["Your Name <you@example.com>"]
