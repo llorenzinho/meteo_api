@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 
 from app.core.config.log_config import LogConfig
 from app.core.config.db_config import DatabaseConfig

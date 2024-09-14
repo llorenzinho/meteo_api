@@ -14,7 +14,7 @@ class LogConfig(BaseSettings):
     logger_name: str = 'app'
     log_format: str = '%(levelname)s | %(asctime)s | %(message)s'
     log_level: str = 'INFO'
-    
+
     model_config = SettingsConfigDict(env_prefix='logger_')
 
     # logger dictConfig

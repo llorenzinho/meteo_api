@@ -13,7 +13,10 @@ class HealthCheckRouter:
         health_check_router = APIRouter()
 
         @health_check_router.get(
-            '/healtz', response_model=HealtcheckOutDTO, status_code=HTTPStatus.OK, tags=["Utils"]
+            '/healtz',
+            response_model=HealtcheckOutDTO,
+            status_code=HTTPStatus.OK,
+            tags=['Utils'],
         )
         def health_check():
             return HealthCheckRouter.health_check()
