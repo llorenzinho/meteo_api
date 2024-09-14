@@ -65,6 +65,14 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: app
+          file: ./app/migrations.Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bee-api-migrations:${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'develop' }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: app
           file: ./app/app.Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bee-api:${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'develop' }}
