@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from app.routes.version import VersionRouter
 from app.core.exceptions.base import base_ex_handler
 from app.db.dao.weather import WeatherDao
 from app.routes.site_route import SiteRouter
@@ -49,6 +50,7 @@ app.add_middleware(
 )
 
 app.include_router(HealthCheckRouter.get_router())
+app.include_router(VersionRouter.get_router())
 app.include_router(MeteoRoute.get_router(openmeteo))
 app.include_router(SiteRouter.get_router(site_service))
 
