@@ -16,7 +16,7 @@ services:
       DB_PWD: "password"
       DB_NAME: "db"
       DB_DATABASE: "db"
-      LOG_LEVEL: "DEBUG"
+      LOGGER_LOG_LEVEL: "INFO"
     depends_on:
       db:
         condition: service_healthy
@@ -61,7 +61,7 @@ services:
       - app-data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
+      timeout: 5s
       retries: 10
 
 volumes:

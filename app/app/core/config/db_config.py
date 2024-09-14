@@ -8,4 +8,4 @@ class DatabaseConfig(BaseSettings):
     password: str = 'password'
     database: str = 'db'
 
-    model_config = SettingsConfigDict(env_prefix='DB_')
+    model_config = SettingsConfigDict(env_prefix='db_')
