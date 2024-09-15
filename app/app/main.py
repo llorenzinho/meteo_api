@@ -15,6 +15,8 @@ from app.core.config.conf import get_config
 from app.db.database import AppDatabase
 from app.core.logger import get_logger
 
+from mangum import Mangum
+
 
 logger = get_logger()
 database = AppDatabase(get_config().db_config)
@@ -55,3 +57,5 @@ app.include_router(MeteoRoute.get_router(openmeteo))
 app.include_router(SiteRouter.get_router(site_service))
 
 app.add_exception_handler(Exception, base_ex_handler)
+
+handler = Mangum(app)

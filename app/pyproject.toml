@@ -21,11 +21,17 @@ pymysql = "^1.1.1"
 cryptography = "^43.0.1"
 pandas = "^2.2.2"
 numpy = "^2.1.1"
+magnum = "^18.0.0"
+aws-lambda-powertools = "^2.43.1"
 
+[tool.poetry-plugin-lambda-build]
+package-artifact-path = "package.zip"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.6.2"
 pytest = "^8.3.2"
+boto3 = "^1.35.19"
+botocore = "^1.35.19"
 
 
 [tool.poetry.group.migrations.dependencies]
